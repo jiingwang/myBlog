@@ -1,0 +1,28 @@
+{
+  "name": "myblog",
+  "version": "1.0.0",
+  "description": "使用koa2+mysql 搭建的博客",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "supervisor app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiingwang/myBlog.git"
+  },
+  "keywords": [
+    "blog",
+    "koa2"
+  ],
+  "author": "jiingwang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jiingwang/myBlog/issues"
+  },
+  "homepage": "https://github.com/jiingwang/myBlog#readme",
+  "dependencies": {
+    "koa-session2": "^2.2.5",
+    "koa2": "^2.0.0-alpha.7"
+  }
+}
