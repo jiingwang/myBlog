@@ -4,9 +4,9 @@ const middleware = require('./middlewares');
 
 middleware(app);
 app.use(async (ctx, next) => {
-	ctx.response.body = "hello myblog1";
-	    ctx.session.view = "index";
+	ctx.session.name = "hello";
 	await next();
+	console.log(ctx.session);
 });
 
 app.listen(3000, () => {
