@@ -1,14 +1,15 @@
-const Koa = require('koa');
+const Koa = require('koa2');
 const app = new Koa();
 const middleware = require('./middlewares');
+const Router = require('koa-router');
+const router = new Router();
+const initRouter = require('./routers');
+const { port } = require('./config');
 
+initRouter(router);
 middleware(app);
-app.use(async (ctx, next) => {
-	ctx.session.name = "hello";
-	await next();
-	console.log(ctx.session);
-});
+app.use(router.routes());
 
-app.listen(3000, () => {
-	console.log('myblog is listening on http://127.0.0.1:3000');
+app.listen(port, () => {
+	console.log('myblog is listening on http://127.0.0.1:' + port);
 });

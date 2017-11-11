@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "supervisor app"
+    "dev": "supervisor app.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,10 @@
   },
   "homepage": "https://github.com/jiingwang/myBlog#readme",
   "dependencies": {
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.1",
     "koa-session2": "^2.2.5",
+    "koa-static": "^4.0.1",
     "koa2": "^2.0.0-alpha.7"
   }
 }
