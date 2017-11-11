@@ -1,5 +1,6 @@
 module.exports = {
     'GET /': async (ctx, next) => {
+        console.log('index page');
         ctx.response.body = ctx.session ? ctx.session.name : 'defautl';
     },
     'GET /signin': async (ctx, next) => {

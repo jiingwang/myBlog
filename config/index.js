@@ -1,4 +1,4 @@
 module.exports = {
     appName: 'myBlog',
-    port: '3000'
+    port: '5000'
 }
