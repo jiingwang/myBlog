@@ -3,6 +3,7 @@ const session = require('koa-session');
 const miCheck = require('./check/check');
 const bodyParser = require('koa-bodyparser');
 const static = require('koa-static');
+const views = require('koa-views');
 
 
 module.exports = (app) => {
@@ -11,6 +12,7 @@ module.exports = (app) => {
 	app.use(session({
 		key: 'user'
 	}, app));
+	app.use(views(path.resolve(__dirname, '../views')))
 	app.use(miCheck());
 
 	app.use(bodyParser());
