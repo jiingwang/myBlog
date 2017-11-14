@@ -3,8 +3,8 @@ module.exports = {
         await ctx.render('signup');
     },
     'GET /signin': async (ctx, next) => {
-        ctx.session.user = "wangjing";
-        ctx.response.body = "signin success";
+        // ctx.session.user = "wangjing";
+        // ctx.response.body = "signin success";
     },
     'POST /signin': async (ctx, next) => {
 
@@ -16,6 +16,8 @@ module.exports = {
 
     },
     'POST /signup': async (ctx, next) => {
-
+        const data = ctx.request.fields;
+        const files = ctx.request.files;
+        ctx.body = data;
     }
 }
