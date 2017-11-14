@@ -1,10 +1,9 @@
 module.exports = {
     'GET /': async (ctx, next) => {
-        console.log('index page');
-        ctx.response.body = ctx.session ? ctx.session.name : 'defautl';
+        await ctx.render('signup');
     },
     'GET /signin': async (ctx, next) => {
-        ctx.session.name = "wangjing";
+        ctx.session.user = "wangjing";
         ctx.response.body = "signin success";
     },
     'POST /signin': async (ctx, next) => {
