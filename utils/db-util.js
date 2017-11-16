@@ -40,6 +40,8 @@ let findDataById = (table, id) => {
 };
 
 
+
+
 module.exports = {
 	query,
 	createTable,

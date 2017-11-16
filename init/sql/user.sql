@@ -1,0 +1,13 @@
+-- 创建user表
+
+CREATE TABLE IF NOT EXISTS `user` (
+	`id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	`user_name` VARCHAR(40) NOT NULL,
+	`pwd` VARCHAR(100) NOT NULL,
+	`gender` VARCHAR(20) NOT NULL,
+	`avatar` VARCHAR(256) NOT NULL,
+	`description` TEXT NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+

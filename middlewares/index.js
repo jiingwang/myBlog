@@ -2,7 +2,6 @@ const path = require('path');
 const session = require('koa-session');
 const miCheck = require('./check/check');
 const bodyParser = require('koa-better-body');
-
 const static = require('koa-static');
 const views = require('koa-views');
 

@@ -1,3 +1,5 @@
+const ModelLogin = require('../models/login.js');
+
 module.exports = {
     'GET /': async (ctx, next) => {
         await ctx.render('signup');
@@ -19,5 +21,7 @@ module.exports = {
         const data = ctx.request.fields;
         const files = ctx.request.files;
         ctx.body = data;
+        ModelLogin.createUser(data);
+        ctx.body = files;
     }
 }
