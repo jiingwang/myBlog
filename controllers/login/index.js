@@ -1,4 +1,4 @@
-const ModelLogin = require('../models/login.js');
+const LoginModel = require('../models/login.js');
 
 module.exports = {
     'GET /': async (ctx, next) => {
@@ -21,7 +21,7 @@ module.exports = {
         const data = ctx.request.fields;
         const files = ctx.request.files;
         ctx.body = data;
-        ModelLogin.createUser(data);
+        LoginModel.createUser(data);
         ctx.body = files;
     }
 }
