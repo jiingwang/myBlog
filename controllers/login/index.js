@@ -1,4 +1,6 @@
-const LoginModel = require('../models/login.js');
+const LoginModel = require('../../models/login.js');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = {
     'GET /': async (ctx, next) => {
@@ -18,10 +20,25 @@ module.exports = {
 
     },
     'POST /signup': async (ctx, next) => {
-        const data = ctx.request.fields;
-        const files = ctx.request.files;
-        ctx.body = data;
-        LoginModel.createUser(data);
-        ctx.body = files;
+        const data = JSON.parse(JSON.stringify(ctx.request.fields));
+        const avatarFile = data.avatar[0];
+        const destFile = path.join('public/upload/image', 'avtar'+(new Date())*1 + path.extname(avatarFile.name));
+        const srcFile = avatarFile.path;
+        const ws = fs.createWriteStream(destFile);
+        fs.createReadStream(srcFile).pipe(ws);
+        const dataObj = {
+            user_name: data.name,
+            pwd: data.password,
+            gender: data.gender,
+            description: data.bio,
+            avatar: 'upload/image/avatar' + '-' + (new Date()*1) + path.extname(avatarFile.name)
+        };
+        const isCreateSuccess = LoginModel.createUser(dataObj);
+
+        if (isCreateSuccess) {
+            ctx.body = "create sucess";
+        } else {
+            ctx.body = "create failed";
+        }
     }
-}
+};

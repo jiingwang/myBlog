@@ -10,19 +10,19 @@ const pool = mysql.createPool({
 
 
 let query = function (sql, values) {
+	console.log('query', sql, values);
 	return new Promise((resolve, reject) => {
-		pool.getConnection(function (err, connection) {
+		pool.getConnection((err, connection) => {
 			if (err) {
 				reject(err);
 			} else {
-				connection.query(sql, values, function(err, rows) {
+				connection.query(sql, values, (err, rows) => {
 					if(err) {
 						reject(err);
 					} else {
 						resolve(rows);
 					}
 				});
-
 				connection.release();
 			}
 		});
