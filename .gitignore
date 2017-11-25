@@ -1,4 +1,4 @@
 node_modules/
 .idea/
 config/db.js
-publick/upload/
+public/upload/
