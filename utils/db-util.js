@@ -10,7 +10,6 @@ const pool = mysql.createPool({
 
 
 let query = function (sql, values) {
-	console.log('query', sql, values);
 	return new Promise((resolve, reject) => {
 		pool.getConnection((err, connection) => {
 			if (err) {
@@ -40,10 +39,8 @@ let findDataById = (table, id) => {
 };
 
 
-
-
 module.exports = {
 	query,
 	createTable,
 	findDataById
-}
+};

@@ -5,4 +5,4 @@ module.exports = {
 		const { user_name, pwd, gender, avatar, description } = data;
 		return query(sql, [user_name, pwd, gender, avatar, description]);
 	}
-}
+};

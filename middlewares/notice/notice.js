@@ -1,0 +1,4 @@
+module.exports = () => {
+    return async (ctx, next) => {
+    }
+};
