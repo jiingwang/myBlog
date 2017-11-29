@@ -1,17 +1,31 @@
 const LoginModel = require('../../models/login.js');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 module.exports = {
     'GET /': async (ctx, next) => {
-
+        ctx.body = 'login success';
     },
     'GET /signin': async (ctx, next) => {
-        // ctx.session.user = "wangjing";
-        // ctx.response.body = "signin success";
+        await ctx.render('signin');
     },
     'POST /signin': async (ctx, next) => {
-
+        const signinData = JSON.parse(JSON.stringify(ctx.request.fields));
+        const {name, password} = signinData;
+        const md5Password = crypto.createHash('md5').update(password).digest('hex');
+        const result = await LoginModel.getPWDByUserName(name);
+        if (result && result.length>0) {
+            if (result[0].pwd === md5Password) {
+                return ctx.redirect('/');
+            } else {
+                ctx.state.error = '登录失败, 密码或者用户名错误';
+                return ctx.render('signin');
+            }
+        } else {
+            ctx.state.error = '登录失败';
+            return ctx.render('signin');
+        }
     },
     'GET /signout': async (ctx, next) => {
 
@@ -53,7 +67,7 @@ module.exports = {
         fs.createReadStream(srcFile).pipe(ws);
         const dataObj = {
             user_name,
-            pwd,
+            pwd: crypto.createHash('md5').update(pwd).digest('hex'),
             gender,
             description,
             avatar: 'upload/image/avatar' + '-' + (new Date()*1) + path.extname(avatarFile.name)
