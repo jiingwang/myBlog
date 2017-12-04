@@ -9,5 +9,5 @@ module.exports = {
 	getPWDByUserName(name) {
 		const querySql = 'SELECT * FROM user WHERE user_name = ?';
 		return query(querySql, [name]);
-	},
+	}
 };

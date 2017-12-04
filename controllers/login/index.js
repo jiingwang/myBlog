@@ -5,7 +5,8 @@ const crypto = require('crypto');
 
 module.exports = {
     'GET /': async (ctx, next) => {
-        ctx.body = 'login success';
+        ctx.state.user = Object.assign({}, ctx.session.user);
+        await ctx.render('posts');
     },
     'GET /signin': async (ctx, next) => {
         await ctx.render('signin');
@@ -17,6 +18,13 @@ module.exports = {
         const result = await LoginModel.getPWDByUserName(name);
         if (result && result.length>0) {
             if (result[0].pwd === md5Password) {
+                ctx.session.user = {
+                    id: result[0].id,
+                    name: result[0].name,
+                    gender: result[0].gender,
+                    description: result[0].description,
+                    avatar: result[0].avatar
+                };
                 return ctx.redirect('/');
             } else {
                 ctx.state.error = '登录失败, 密码或者用户名错误';
@@ -61,7 +69,8 @@ module.exports = {
             return ctx.render('signup');
         }
 
-        const destFile = path.join('public/upload/image', 'avtar'+(new Date())*1 + path.extname(avatarFile.name));
+        const time = new Date();
+        const destFile = path.join('public/upload/image', 'avatar' + '-' +time*1 + path.extname(avatarFile.name));
         const srcFile = avatarFile.path;
         const ws = fs.createWriteStream(destFile);
         fs.createReadStream(srcFile).pipe(ws);
@@ -70,7 +79,7 @@ module.exports = {
             pwd: crypto.createHash('md5').update(pwd).digest('hex'),
             gender,
             description,
-            avatar: 'upload/image/avatar' + '-' + (new Date()*1) + path.extname(avatarFile.name)
+            avatar: 'upload/image/avatar' + '-' + (time*1) + path.extname(avatarFile.name)
         };
         const isCreateSuccess = await LoginModel.createUser(dataObj);
         if (isCreateSuccess) {
