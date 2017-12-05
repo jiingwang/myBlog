@@ -5,8 +5,10 @@ const crypto = require('crypto');
 
 module.exports = {
     'GET /': async (ctx, next) => {
-        ctx.state.user = Object.assign({}, ctx.session.user);
-        await ctx.render('posts');
+        // ctx.state.user = Object.assign({}, ctx.session.user);
+        // await ctx.render('posts');
+        await ctx.redirect('/posts');
+        return;
     },
     'GET /signin': async (ctx, next) => {
         await ctx.render('signin');
@@ -36,7 +38,9 @@ module.exports = {
         }
     },
     'GET /signout': async (ctx, next) => {
-
+        ctx.session.user = null;
+        ctx.state.user = null;
+        return ctx.redirect('/signin');
     },
     'GET /signup': async (ctx, next) => {
         await ctx.render('signup');
