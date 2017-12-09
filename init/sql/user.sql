@@ -8,6 +8,3 @@ CREATE TABLE IF NOT EXISTS `user` (
 	`avatar` VARCHAR(256) NOT NULL,
 	`description` TEXT NOT NULL
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-

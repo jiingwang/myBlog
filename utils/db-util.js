@@ -1,12 +1,7 @@
 const config = require('../config').db;
 const mysql = require('mysql');
 
-const pool = mysql.createPool({
-	host: 'localhost',
-	user: 'root',
-	password: '',
-	database: 'blog'
-});
+const pool = mysql.createPool(config);
 
 
 let query = function (sql, values) {
